@@ -88,9 +88,9 @@ export const defaultProjects = [
     stack: ["React", "Node.js", "Express", "PostgreSQL", "JWT", "Recharts"],
     color: "#10B981",
     icon: "📊",
-    liveUrl: "",
+    liveUrl: "https://finance-tracker-delta-sooty.vercel.app",
     repoUrl: "",
-    comingSoon: true,
+    comingSoon: false,
     order: 4,
   },
 ];
