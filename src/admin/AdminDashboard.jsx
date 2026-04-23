@@ -7,6 +7,8 @@ import {
   doc,
   orderBy,
   query,
+  addDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db, auth } from "../firebase/config";
@@ -105,6 +107,7 @@ export default function AdminDashboard() {
   const [editProject, setEditProject] = useState(null);
   const [deleting,    setDeleting]    = useState(null);
   const [toast,       setToast]       = useState(null);
+  const [seeding,     setSeeding]     = useState(false);
   const navigate = useNavigate();
 
   // Protección de ruta: si no está autenticado con Firebase, redirige al login
@@ -179,6 +182,28 @@ export default function AdminDashboard() {
     fetchProjects();
   };
 
+  // Importa los defaultProjects a Firestore (migración única)
+  const handleSeedProjects = async () => {
+    if (!window.confirm("¿Importar los proyectos locales a Firestore? Se agregarán como nuevos documentos.")) return;
+    setSeeding(true);
+    try {
+      for (const p of defaultProjects) {
+        const { id: _id, ...data } = p;
+        await addDoc(collection(db, "projects"), {
+          ...data,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        });
+      }
+      showToast(`✅ ${defaultProjects.length} proyectos importados a Firestore`);
+      await fetchProjects();
+    } catch (err) {
+      showToast("Error al importar proyectos", "error");
+    } finally {
+      setSeeding(false);
+    }
+  };
+
   // Cierra sesión
   const handleLogout = async () => {
     await signOut(auth);
@@ -222,13 +247,25 @@ export default function AdminDashboard() {
                 : `${projects.length} proyecto${projects.length !== 1 ? "s" : ""} en Firestore`}
             </p>
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => { setEditProject(null); setShowForm(true); }}
-            id="add-project-btn"
-          >
-            <PlusIcon /> Nuevo proyecto
-          </button>
+          <div style={{ display: "flex", gap: "0.75rem" }}>
+            {!usingLocal && (
+              <button
+                className="btn btn-outline"
+                onClick={handleSeedProjects}
+                disabled={seeding}
+                title="Importar proyectos locales a Firestore"
+              >
+                {seeding ? <><span className="admin-login__spinner" /> Importando...</> : "📥 Migrar locales"}
+              </button>
+            )}
+            <button
+              className="btn btn-primary"
+              onClick={() => { setEditProject(null); setShowForm(true); }}
+              id="add-project-btn"
+            >
+              <PlusIcon /> Nuevo proyecto
+            </button>
+          </div>
         </div>
 
         {/* Lista de proyectos */}
