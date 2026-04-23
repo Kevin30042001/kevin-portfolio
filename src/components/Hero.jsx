@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { personalInfo } from "../data/portfolio-data";
 import { useInView } from "../hooks/useInView";
+import kevinPhoto from "../images/foto-kevin.jpg";
 import "./Hero.css";
 
 // Iconos SVG inline (sin dependencias externas)
@@ -149,7 +150,7 @@ export default function Hero() {
           <div className="hero__photo-ring">
             <div className="hero__photo-glow" />
             <img
-              src="/foto-kevin.jpg"
+              src={kevinPhoto}
               alt="Kevin Chávez — Desarrollador Full Stack"
               className="hero__photo"
             />
