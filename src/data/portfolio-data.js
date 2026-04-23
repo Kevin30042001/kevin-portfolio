@@ -135,6 +135,12 @@ export const education = [
     detail: "1 año 2 meses",
   },
   {
+    title: "Curso Intensivo de Inglés",
+    institution: "Here And Now — Instituto de Idiomas",
+    period: "Abr 2026 – actualidad",
+    detail: "Inglés intensivo presencial/online · En curso",
+  },
+  {
     title: "Bachillerato General",
     institution: "Colegio San Martín de Porres",
     period: "2017 – 2018",
