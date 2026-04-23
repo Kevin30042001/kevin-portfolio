@@ -1,0 +1,97 @@
+/* ── Contact ─────────────────────────────────────────────────── */
+.contact {
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+/* Glow ambiental */
+.contact__glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.04) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.contact__inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.contact__lead {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+}
+
+.contact__lead strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Botones principales */
+.contact__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.contact__btn-main {
+  font-size: 0.95rem;
+  gap: 10px;
+}
+
+/* Links secundarios */
+.contact__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.contact__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.contact__link:hover {
+  color: var(--accent);
+  background: var(--accent-dark);
+}
+
+.contact__divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .contact__buttons { flex-direction: column; align-items: center; }
+  .contact__btn-main { width: 100%; justify-content: center; }
+}

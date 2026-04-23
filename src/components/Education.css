@@ -1,0 +1,109 @@
+/* ── Education ──────────────────────────────────────────────── */
+.education {
+  background: var(--bg-primary);
+}
+
+.edu-timeline {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Timeline Item ───────────────────────────────────────────── */
+.edu-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 20px;
+}
+
+/* Columna izquierda: dot + línea */
+.edu-item__dot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edu-item__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  flex-shrink: 0;
+  margin-top: 6px;
+  transition: var(--transition);
+}
+
+.edu-item:hover .edu-item__dot {
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.edu-item__connector {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(to bottom, var(--accent-dim), transparent);
+  min-height: 20px;
+}
+
+/* Última entrada: sin conector */
+.edu-item:last-child .edu-item__connector {
+  display: none;
+}
+
+/* Columna derecha: card */
+.edu-item__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+
+.edu-item:hover .edu-item__card {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.edu-item__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.edu-item__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.edu-item__institution {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.edu-item__period {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.edu-item__detail {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .edu-item__card { padding: 16px; }
+  .edu-item__header { flex-direction: column; }
+}

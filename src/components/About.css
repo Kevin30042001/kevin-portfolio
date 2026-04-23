@@ -1,0 +1,106 @@
+/* ── About ──────────────────────────────────────────────────── */
+.about {
+  background: var(--bg-secondary);
+  position: relative;
+}
+
+.about::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+/* Grid de dos columnas */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── Bio ─────────────────────────────────────────────────────── */
+.about__bio-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+.about__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.about__meta-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ── Skills ──────────────────────────────────────────────────── */
+.about__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.about__skill-group {
+  /* Sin transición individual, se anima desde el padre */
+}
+
+.about__skill-category {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about__skill-category::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.about__skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about__pill {
+  transition: var(--transition-fast);
+  cursor: default;
+}
+
+.about__pill:hover {
+  background: rgba(100, 255, 218, 0.18);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

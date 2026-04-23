@@ -1,0 +1,314 @@
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 72px; /* altura navbar */
+}
+
+/* Glows ambientales */
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__glow--1 {
+  width: 600px;
+  height: 600px;
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+.hero__glow--2 {
+  width: 400px;
+  height: 400px;
+  bottom: 0;
+  left: -80px;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.04) 0%, transparent 70%);
+  animation: glow-pulse 8s ease-in-out infinite reverse;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* Layout interior */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 60px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+/* ── Contenido de texto ─────────────────────────────────────── */
+.hero__greeting {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #e6edf3 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  min-height: 2.2rem;
+  margin-bottom: 24px;
+}
+
+/* Typewriter */
+.typewriter { color: var(--text-primary); }
+
+.typewriter__cursor {
+  display: inline-block;
+  color: var(--accent);
+  animation: blink 1s step-end infinite;
+  font-weight: 300;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.hero__bio {
+  max-width: 520px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+/* Botones de acción */
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Iconos sociales */
+.hero__socials {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.hero__social-link:hover {
+  color: var(--accent);
+  background: var(--accent-dark);
+  transform: translateY(-3px);
+}
+
+/* Línea decorativa después de los iconos */
+.hero__social-line {
+  width: 80px;
+  height: 1px;
+  background: var(--border-hover);
+  margin-left: 8px;
+}
+
+/* ── Foto de perfil ───────────────────────────────────── */
+.hero__photo-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  /* Espacio extra abajo para que el badge no se superponga */
+  padding-bottom: 28px;
+}
+
+.hero__photo-ring {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(100, 255, 218, 0.2) 50%, transparent 100%);
+}
+
+.hero__photo-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, transparent 70%);
+  filter: blur(16px);
+  animation: glow-pulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border: 3px solid var(--bg-primary);
+}
+
+/* Badge "Disponible" */
+.hero__badge {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 6px #10B981; }
+  50%       { box-shadow: 0 0 14px #10B981, 0 0 20px rgba(16, 185, 129, 0.4); }
+}
+
+/* ── Indicador de scroll ─────────────────────────────────────── */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero__scroll-indicator span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 0;
+    padding-top: 32px;
+    padding-bottom: 80px;
+  }
+
+  .hero__bio { margin: 0 auto 36px; }
+  .hero__actions { justify-content: center; }
+  .hero__socials { justify-content: center; }
+  .hero__social-line { display: none; }
+
+  /* Foto va primero en mobile */
+  .hero__photo-wrapper {
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px; /* espacio para el badge */
+    margin: 0 auto;
+  }
+
+  .hero__photo-ring {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Badge centrado en mobile */
+  .hero__badge {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__photo-ring {
+    width: 160px;
+    height: 160px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero__name {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+}

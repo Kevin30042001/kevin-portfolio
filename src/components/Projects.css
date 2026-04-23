@@ -1,0 +1,185 @@
+/* ── Projects ───────────────────────────────────────────────── */
+.projects {
+  background: var(--bg-primary);
+  position: relative;
+}
+
+/* Grid de 2 columnas en desktop */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ── Project Card ────────────────────────────────────────────── */
+.project-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: default;
+}
+
+/* Hover: elevación + glow del color del proyecto */
+.project-card:hover {
+  border-color: color-mix(in srgb, var(--project-color) 40%, transparent);
+  transform: translateY(-6px);
+  background: var(--bg-card-hover);
+}
+
+/* Glow de hover (pseudo-elemento en CSS puro) */
+.project-card__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    color-mix(in srgb, var(--project-color) 8%, transparent),
+    transparent 40%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-card__glow {
+  opacity: 1;
+}
+
+/* Header */
+.project-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.project-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.project-card__soon {
+  font-size: 0.72rem;
+}
+
+/* Título */
+.project-card__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.project-card:hover .project-card__name {
+  color: var(--project-color);
+}
+
+.project-card__subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+}
+
+/* Descripción */
+.project-card__desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+/* Stack pills */
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.project-card__tech {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--project-color) 10%, transparent);
+  color: var(--project-color);
+  border: 1px solid color-mix(in srgb, var(--project-color) 25%, transparent);
+  white-space: nowrap;
+}
+
+/* Botones */
+.project-card__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.project-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.project-card__btn:hover {
+  color: var(--project-color);
+  border-color: color-mix(in srgb, var(--project-color) 50%, transparent);
+  background: color-mix(in srgb, var(--project-color) 8%, transparent);
+}
+
+.project-card__btn--disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading state */
+.projects__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 80px 0;
+  color: var(--text-muted);
+}
+
+.projects__spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+}
