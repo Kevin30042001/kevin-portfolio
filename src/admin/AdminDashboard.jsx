@@ -8,7 +8,8 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { db, auth } from "../firebase/config";
 import { defaultProjects } from "../data/portfolio-data";
 import ProjectForm from "./ProjectForm";
 import "./Admin.css";
@@ -106,11 +107,12 @@ export default function AdminDashboard() {
   const [toast,       setToast]       = useState(null);
   const navigate = useNavigate();
 
-  // Protección de ruta: si no está autenticado, redirige al login
+  // Protección de ruta: si no está autenticado con Firebase, redirige al login
   useEffect(() => {
-    if (!sessionStorage.getItem("admin_auth")) {
-      navigate("/admin");
-    }
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) navigate("/admin");
+    });
+    return unsub;
   }, [navigate]);
 
   // Carga proyectos desde Firestore
@@ -178,8 +180,8 @@ export default function AdminDashboard() {
   };
 
   // Cierra sesión
-  const handleLogout = () => {
-    sessionStorage.removeItem("admin_auth");
+  const handleLogout = async () => {
+    await signOut(auth);
     navigate("/admin");
   };
 

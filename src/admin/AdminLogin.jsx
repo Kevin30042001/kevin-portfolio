@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/config";
 import "./Admin.css";
 
 export default function AdminLogin() {
+  const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
   const [error,    setError]    = useState("");
   const [loading,  setLoading]  = useState(false);
@@ -13,21 +16,15 @@ export default function AdminLogin() {
     setLoading(true);
     setError("");
 
-    // Pequeño delay para que no sea instantáneo (anti-brute force visual)
-    await new Promise((r) => setTimeout(r, 600));
-
-    const correct = import.meta.env.VITE_ADMIN_PASSWORD;
-
-    if (password === correct) {
-      // Guarda la sesión en sessionStorage (se borra al cerrar el tab)
-      sessionStorage.setItem("admin_auth", "true");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/admin/dashboard");
-    } else {
-      setError("Contraseña incorrecta. Intenta de nuevo.");
+    } catch (err) {
+      setError("Credenciales incorrectas. Intenta de nuevo.");
       setPassword("");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -50,6 +47,22 @@ export default function AdminLogin() {
         {/* Formulario */}
         <form className="admin-login__form" onSubmit={handleSubmit}>
           <div className="admin-login__field">
+            <label htmlFor="admin-email" className="admin-login__label">
+              Correo electrónico
+            </label>
+            <input
+              id="admin-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="admin-login__input"
+              placeholder="admin@ejemplo.com"
+              autoFocus
+              required
+            />
+          </div>
+
+          <div className="admin-login__field">
             <label htmlFor="admin-password" className="admin-login__label">
               Contraseña
             </label>
@@ -60,7 +73,6 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               className={`admin-login__input ${error ? "admin-login__input--error" : ""}`}
               placeholder="••••••••••"
-              autoFocus
               required
             />
           </div>
@@ -74,7 +86,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             className="btn btn-primary admin-login__submit"
-            disabled={loading || !password}
+            disabled={loading || !email || !password}
             id="admin-login-btn"
           >
             {loading ? (
