@@ -181,6 +181,17 @@ section {
   box-shadow: 0 0 20px var(--accent-glow);
 }
 
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid transparent;
+}
+.btn-ghost:hover {
+  color: var(--accent);
+  background: var(--accent-dark);
+  border-color: var(--border);
+}
+
 /* ── Badges / Pills ─────────────────────────────────────────── */
 .badge {
   display: inline-block;
