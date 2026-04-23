@@ -86,15 +86,6 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Botón CV — desktop */}
-        <a
-          href="/Kevin-Chavez-CV.pdf"
-          className="btn btn-outline navbar__cv"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Descargar CV
-        </a>
 
         {/* Botón hamburguesa — mobile */}
         <button
@@ -121,15 +112,6 @@ export default function Navbar() {
             {link.label}
           </a>
         ))}
-        <a
-          href="/Kevin-Chavez-CV.pdf"
-          className="btn btn-outline"
-          style={{ marginTop: "8px", width: "100%", justifyContent: "center" }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Descargar CV
-        </a>
       </div>
     </header>
   );
